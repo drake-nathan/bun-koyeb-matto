@@ -1,4 +1,5 @@
 import { type Connection } from "mongoose";
+
 import { type TokenSchema } from "./tokenSchema";
 
 export const getToken = (

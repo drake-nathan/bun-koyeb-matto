@@ -1,5 +1,5 @@
-import { z } from "zod";
 import { type InferSchemaType, Schema } from "mongoose";
+import { z } from "zod";
 
 export const tokenSchema = new Schema({
   token_id: { type: Number, required: true },

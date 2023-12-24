@@ -1,8 +1,13 @@
+import Bugsnag from "@bugsnag/js";
 import { type Connection } from "mongoose";
+
 import { connectionFactory } from "./db/connectionFactory";
 import { getToken } from "./db/queries";
 import { tokenZod } from "./db/tokenSchema";
+import { envVars } from "./env.config";
 import { deEscapeSvg } from "./utils/deEscapeSvg";
+
+Bugsnag.start({ apiKey: envVars.BUGSNAG_API_KEY });
 
 Bun.serve({
   fetch: async (request) => {
@@ -42,6 +47,10 @@ Bun.serve({
       const svg = deEscapeSvg(tokenValidated.svg);
 
       return new Response(JSON.stringify(svg), { status: 200 });
+    } catch (error) {
+      Bugsnag.notify(error as Error);
+
+      return new Response(JSON.stringify(error), { status: 500 });
     } finally {
       if (conn) conn.close();
     }

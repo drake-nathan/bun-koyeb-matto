@@ -1,12 +1,10 @@
 import { createConnection } from "mongoose";
+
+import { envVars } from "../env.config";
 import { tokenSchema } from "./tokenSchema";
 
 export const connectionFactory = async () => {
-  const dbConnectionString = process.env.DB_CONNECTION_STRING;
-
-  if (!dbConnectionString) {
-    throw new Error("DB_CONNECTION_STRING not found in .env");
-  }
+  const dbConnectionString = envVars.DB_CONNECTION_STRING;
 
   const conn = await createConnection(dbConnectionString).asPromise();
 
