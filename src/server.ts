@@ -22,12 +22,6 @@ Bun.serve({
 
       const token = await getToken(conn, projectSlug ?? "100x10x1-a-goerli", 0);
 
-      if (!token || !token.svg) {
-        return new Response("Token not found, or is missing SVG.", {
-          status: 404,
-        });
-      }
-
       const tokenValidated = tokenZod.parse(token);
 
       const imageLastUpdated = tokenValidated.image_updated_at;
