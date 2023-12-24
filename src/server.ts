@@ -5,7 +5,7 @@ import { connectionFactory } from "./db/connectionFactory";
 import { getToken } from "./db/queries";
 import { tokenZod } from "./db/tokenSchema";
 import { envVars } from "./env.config";
-import { deEscapeSvg } from "./utils/deEscapeSvg";
+import { updateCompositeImage } from "./images/updateCompositeImage";
 
 Bugsnag.start({ apiKey: envVars.BUGSNAG_API_KEY });
 
@@ -44,9 +44,15 @@ Bun.serve({
         });
       }
 
-      const svg = deEscapeSvg(tokenValidated.svg);
+      const updatedToken = await updateCompositeImage({
+        conn,
+        svg: tokenValidated.svg,
+        projectId: token.project_id,
+        projectSlug: token.project_slug,
+        tokenId: token.token_id,
+      });
 
-      return new Response(JSON.stringify(svg), { status: 200 });
+      return new Response(JSON.stringify(updatedToken), { status: 200 });
     } catch (error) {
       Bugsnag.notify(error as Error);
 
