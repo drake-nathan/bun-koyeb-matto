@@ -16,6 +16,8 @@ Bun.serve({
     try {
       conn = await connectionFactory();
 
+      console.info("Connected to Cosmos DB...");
+
       const url = new URL(request.url);
       const force = url.searchParams.get("force") === "true";
       const projectSlug = url.searchParams.get("projectSlug");
@@ -28,7 +30,11 @@ Bun.serve({
         });
       }
 
+      console.info("Token retrieved, validating with Zod schema...");
+
       const tokenValidated = tokenZod.parse(token);
+
+      console.info("Token validated, checking if image needs updating...");
 
       const imageLastUpdated = tokenValidated.image_updated_at;
 
@@ -37,12 +43,16 @@ Bun.serve({
         imageLastUpdated &&
         imageLastUpdated > new Date(Date.now() - 1000 * 60 * 10)
       ) {
+        const message =
+          "Image updated less than 10 minutes ago, returning current image.";
+        console.info(message);
         return new Response(JSON.stringify(tokenValidated), {
           status: 200,
-          statusText:
-            "Image updated less than 10 minutes ago, returning current image",
+          statusText: message,
         });
       }
+
+      console.info("Attempting to update composite image...");
 
       const updatedToken = await updateCompositeImage({
         conn,
@@ -52,7 +62,11 @@ Bun.serve({
         tokenId: token.token_id,
       });
 
-      return new Response(JSON.stringify(updatedToken), { status: 200 });
+      console.info("Composite image updated successfully.");
+      return new Response(JSON.stringify(updatedToken), {
+        status: 200,
+        statusText: "Composite image was successfully updated.",
+      });
     } catch (error) {
       Bugsnag.notify(error as Error);
 
