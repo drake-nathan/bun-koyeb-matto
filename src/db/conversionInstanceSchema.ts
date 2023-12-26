@@ -9,6 +9,8 @@ export const conversionInstanceSchema = new Schema({
   successful: { type: Boolean },
 });
 
+conversionInstanceSchema.index({ started_at: 1 });
+
 export type ConversionInstanceSchema = InferSchemaType<
   typeof conversionInstanceSchema
 >;

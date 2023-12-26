@@ -70,7 +70,7 @@ Bun.serve({
       if (
         force ||
         !lastConversionInstance ||
-        lastConversionInstance.started_at >
+        lastConversionInstance.started_at <
           new Date(Date.now() - 1000 * 60 * updateInterval)
       ) {
         const newConversionInstance = await createConversionInstance(
