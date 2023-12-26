@@ -48,12 +48,16 @@ export const updateConversionInstance = (
   return query.exec();
 };
 
-export const getLatestConverstionInstance = (
+export const getLatestConverstionInstance = async (
   conn: Connection,
   projectSlug: string,
 ) => {
   const ConversionInstance =
     conn.model<ConversionInstanceSchema>("ConversionInstance");
+
+  const exists = await ConversionInstance.findOne({});
+
+  if (!exists) return null;
 
   const query = ConversionInstance.findOne({ project_slug: projectSlug })
     .sort({ started_at: -1 })
