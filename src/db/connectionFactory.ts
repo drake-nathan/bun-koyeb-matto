@@ -1,6 +1,7 @@
 import { createConnection } from "mongoose";
 
 import { envVars } from "../env.config";
+import { conversionInstanceSchema } from "./conversionInstanceSchema";
 import { tokenSchema } from "./tokenSchema";
 
 export const connectionFactory = async () => {
@@ -13,6 +14,7 @@ export const connectionFactory = async () => {
   });
 
   conn.model("Token", tokenSchema);
+  conn.model("ConversionInstance", conversionInstanceSchema);
 
   return conn;
 };

@@ -1,6 +1,5 @@
 import sharp from "sharp";
 
-import { deEscapeSvg } from "../utils/deEscapeSvg";
 import { uploadImage } from "./uploadImage";
 
 export const svgToPngAndUpload = async (
@@ -19,9 +18,7 @@ export const svgToPngAndUpload = async (
     small: { width: 540, height: 960 },
   };
 
-  const svgParsed = deEscapeSvg(svg);
-
-  const buffer = await sharp(Buffer.from(svgParsed)).png().toBuffer();
+  const buffer = await sharp(Buffer.from(svg)).png().toBuffer();
   const midBuffer = await sharp(buffer).resize(sizes.mid).toBuffer();
   const smallBuffer = await sharp(buffer).resize(sizes.small).toBuffer();
 
