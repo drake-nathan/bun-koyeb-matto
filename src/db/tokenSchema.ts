@@ -2,35 +2,35 @@ import { type InferSchemaType, Schema } from "mongoose";
 import { z } from "zod";
 
 export const tokenSchema = new Schema({
-  token_id: { type: Number, required: true },
-  project_id: { type: Number, required: true },
-  project_name: { type: String, required: true },
-  project_slug: { type: String, required: true },
-  width_ratio: { type: Number },
+  aspect_ratio: { required: true, type: Number },
   height_ratio: { type: Number },
-  aspect_ratio: { type: Number, required: true },
   image: { type: String },
   image_mid: { type: String },
   image_small: { type: String },
   image_updated_at: { type: Date },
+  project_id: { required: true, type: Number },
+  project_name: { required: true, type: String },
+  project_slug: { required: true, type: String },
   svg: { type: String },
+  token_id: { required: true, type: Number },
+  width_ratio: { type: Number },
 });
 
 export type TokenSchema = InferSchemaType<typeof tokenSchema>;
 
 export const tokenZod = z.object({
-  token_id: z.number(),
-  project_id: z.number(),
-  project_name: z.string(),
-  project_slug: z.string(),
-  width_ratio: z.number().optional(),
-  height_ratio: z.number().optional(),
   aspect_ratio: z.number(),
+  height_ratio: z.number().optional(),
   image: z.string().optional(),
   image_mid: z.string().optional(),
   image_small: z.string().optional(),
   image_updated_at: z.date().optional(),
+  project_id: z.number(),
+  project_name: z.string(),
+  project_slug: z.string(),
   svg: z.string(),
+  token_id: z.number(),
+  width_ratio: z.number().optional(),
 });
 
 export type Token = z.infer<typeof tokenZod>;

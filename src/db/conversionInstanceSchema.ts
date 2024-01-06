@@ -3,9 +3,9 @@ import { type InferSchemaType, Schema } from "mongoose";
 import { z } from "zod";
 
 export const conversionInstanceSchema = new Schema({
-  started_at: { type: Date, required: true },
   completed_at: { type: Date },
-  project_slug: { type: String, required: true },
+  project_slug: { required: true, type: String },
+  started_at: { required: true, type: Date },
   successful: { type: Boolean },
 });
 
@@ -17,9 +17,9 @@ export type ConversionInstanceSchema = InferSchemaType<
 
 export const conversionInstanceZod = z.object({
   _id: z.instanceof(ObjectId),
-  started_at: z.date(),
   completed_at: z.date().optional(),
   project_slug: z.string(),
+  started_at: z.date(),
   successful: z.boolean().optional(),
 });
 

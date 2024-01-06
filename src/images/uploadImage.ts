@@ -13,8 +13,9 @@ export const uploadImage = async (
   );
 
   const containerClient = blobServiceClient.getContainerClient(folderName);
-  containerClient.createIfNotExists();
-  containerClient.setAccessPolicy("blob");
+
+  await containerClient.createIfNotExists();
+  await containerClient.setAccessPolicy("blob");
 
   const imageName = `${project_slug}_${token_id}.png`;
   const blockBlobClient = containerClient.getBlockBlobClient(imageName);

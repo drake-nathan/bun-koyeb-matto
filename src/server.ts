@@ -1,5 +1,6 @@
+import type { Connection } from "mongoose";
+
 import Bugsnag from "@bugsnag/js";
-import { type Connection } from "mongoose";
 import { optimize } from "svgo";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
@@ -130,9 +131,9 @@ Bun.serve({
 
       const updatedToken = await updateCompositeImage({
         conn,
-        svg: svgOptimized,
         projectId: token.project_id,
         projectSlug: token.project_slug,
+        svg: svgOptimized,
         tokenId: token.token_id,
       });
 
@@ -151,7 +152,7 @@ Bun.serve({
 
       return new Response(JSON.stringify(error), { status: 500 });
     } finally {
-      if (conn) conn.close();
+      if (conn) await conn.close();
     }
   },
 });

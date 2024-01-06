@@ -1,10 +1,10 @@
-import { type Connection } from "mongoose";
+import type { Connection } from "mongoose";
 
-import {
-  type ConversionInstance,
-  type ConversionInstanceSchema,
+import type {
+  ConversionInstance,
+  ConversionInstanceSchema,
 } from "./conversionInstanceSchema";
-import { type TokenSchema } from "./tokenSchema";
+import type { TokenSchema } from "./tokenSchema";
 
 export const getToken = (
   conn: Connection,
@@ -26,8 +26,8 @@ export const createConversionInstance = (
     conn.model<ConversionInstanceSchema>("ConversionInstance");
 
   const conversionInstance = new ConversionInstance({
-    started_at: new Date(),
     project_slug: projectSlug,
+    started_at: new Date(),
   });
 
   return conversionInstance.save();

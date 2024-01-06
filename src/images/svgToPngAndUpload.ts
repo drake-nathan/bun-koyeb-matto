@@ -13,9 +13,9 @@ export const svgToPngAndUpload = async (
   image_small: string;
 }> => {
   const sizes = {
-    full: { width: 2160, height: 3840 },
-    mid: { width: 1080, height: 1920 },
-    small: { width: 540, height: 960 },
+    full: { height: 3840, width: 2160 },
+    mid: { height: 1920, width: 1080 },
+    small: { height: 960, width: 540 },
   };
 
   const buffer = await sharp(Buffer.from(svg)).png().toBuffer();

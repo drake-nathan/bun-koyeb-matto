@@ -1,19 +1,20 @@
 import type { Connection } from "mongoose";
 
 import type { TokenSchema } from "../db/tokenSchema";
+
 import { svgToPngAndUpload } from "./svgToPngAndUpload";
 
 export const updateCompositeImage = async ({
   conn,
-  svg,
   projectId,
   projectSlug,
+  svg,
   tokenId,
 }: {
   conn: Connection;
-  svg: string;
   projectId: number;
   projectSlug: string;
+  svg: string;
   tokenId: number;
 }) => {
   const pngs = await svgToPngAndUpload(svg, projectId, projectSlug, tokenId);
