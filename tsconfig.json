@@ -17,10 +17,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "es2022",
-    "types": [
-      "bun-types", // add Bun global
-    ],
+    "target": "es2022"
   },
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*"]
 }
