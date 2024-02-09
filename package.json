@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@azure/storage-blob": "^12.17.0",
-    "@bugsnag/js": "^7.22.3",
+    "@bugsnag/js": "^7.22.4",
     "mongoose": "^8.1.1",
     "sharp": "^0.33.2",
     "svgo": "^3.2.0",
@@ -20,7 +20,7 @@
     "zod-validation-error": "^3.0.0"
   },
   "devDependencies": {
-    "@types/bun": "^1.0.4",
+    "@types/bun": "^1.0.5",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.56.0",
