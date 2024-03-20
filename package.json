@@ -1,35 +1,36 @@
 {
   "name": "bun-koyeb-matto",
-  "module": "src/server.ts",
   "type": "module",
+  "module": "src/server.ts",
   "scripts": {
-    "start": "docker run --name bun-koyeb-matto -p 3000:3000 bun-koyeb-matto",
-    "dev": "bun src/server.ts",
     "build": "docker build . -t bun-koyeb-matto",
-    "lint": "eslint",
-    "lint:fix": "eslint --fix",
-    "format": "prettier --write"
+    "dev": "bun src/server.ts",
+    "format": "prettier --write .",
+    "lint": "eslint --report-unused-disable-directives --fix .",
+    "prettify": "bun run format && bun run lint",
+    "start": "docker run --name bun-koyeb-matto -p 3000:3000 bun-koyeb-matto"
   },
   "dependencies": {
     "@azure/storage-blob": "^12.17.0",
     "@bugsnag/js": "^7.22.4",
-    "mongoose": "^8.2.1",
+    "mongoose": "^8.2.2",
     "sharp": "^0.33.2",
     "svgo": "^3.2.0",
     "zod": "^3.22.4",
     "zod-validation-error": "^3.0.3"
   },
   "devDependencies": {
-    "@types/bun": "^1.0.8",
-    "@typescript-eslint/eslint-plugin": "^7.1.1",
-    "@typescript-eslint/parser": "^7.1.1",
+    "@types/bun": "^1.0.10",
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "@typescript-eslint/parser": "^7.3.1",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-perfectionist": "^2.6.0",
+    "eslint-plugin-perfectionist": "^2.7.0",
     "prettier": "^3.2.5",
-    "prettier-plugin-sort-json": "^3.1.0"
+    "prettier-plugin-packagejson": "^2.4.12",
+    "prettier-plugin-sort-json": "^4.0.0"
   },
   "peerDependencies": {
     "typescript": "^5.4.2"

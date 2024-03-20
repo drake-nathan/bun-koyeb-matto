@@ -83,7 +83,7 @@ Bun.serve({
           newConversionInstance,
         );
       } else {
-        const message = `Conversion instance started less than ${updateInterval} minutes ago, returning current image.`;
+        const message = `Conversion instance started less than ${updateInterval.toString()} minutes ago, returning current image.`;
         console.info(message);
         return new Response(JSON.stringify(lastConversionInstance), {
           status: 200,
@@ -114,7 +114,7 @@ Bun.serve({
         imageLastUpdated &&
         imageLastUpdated > new Date(Date.now() - 1000 * 60 * updateInterval)
       ) {
-        const message = `Image updated less than ${updateInterval} minutes ago, returning current image.`;
+        const message = `Image updated less than ${updateInterval.toString()} minutes ago, returning current image.`;
         console.info(message);
         return new Response(JSON.stringify(tokenValidated), {
           status: 200,
